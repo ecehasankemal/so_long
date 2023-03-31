@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   window_bonus.c                                     :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: hece <hece@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:07:21 by hece              #+#    #+#             */
-/*   Updated: 2023/03/31 17:07:22 by hece             ###   ########.fr       */
+/*   Updated: 2023/03/31 22:02:31 by hece             ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../inc/so_long_bonus.h"
 
@@ -18,7 +18,11 @@ void
 	game->pxl = 50;
 	game->mlx = mlx_init();
 	if (!game->mlx)
+	{
+		ft_free_map_2d(game->map);
+		free(game);
 		exit(1);
+	}
 	game->mlx_win = mlx_new_window(game->mlx, game->pxl * game->columns,
 			game->pxl * (game->rows + 1), "42 SoLong by hece");
 	init_assets(game);
@@ -34,7 +38,6 @@ int
 	ft_free_map_2d(game->map);
 	close_img(game);
 	mlx_destroy_window(game->mlx, game->mlx_win);
-	free(game->mlx);
 	free(game);
 	exit(1);
 	return (0);
